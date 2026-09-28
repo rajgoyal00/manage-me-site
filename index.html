@@ -51,19 +51,31 @@
     <h2>Data &amp; Privacy</h2>
 
     <h3>What bank data we access</h3>
-    <p>Manage Me uses <a href="https://plaid.com">Plaid</a> (Transactions product only) to import
-      your accounts (name, type, last 4 digits, and balance) and their transactions. It does not
-      request full account or routing numbers, identity details, or the ability to move money.
-      You sign in to your bank through Plaid. Manage Me never sees or stores your bank password.</p>
+    <p>Manage Me uses <a href="https://plaid.com">Plaid</a> for two products only:</p>
+    <ul>
+      <li><strong>Transactions:</strong> your accounts (name, type, last 4 digits, and balance)
+        and their transactions.</li>
+      <li><strong>Liabilities</strong>, for credit cards and loans, and only if you agree when
+        you connect: interest rates, payment amounts and due dates, statement balances, and for
+        mortgages the property address and year-to-date interest.</li>
+    </ul>
+    <p>Full account and payment reference numbers that come with these details are discarded,
+      not stored. Manage Me does not use Plaid Auth, Identity, Balance or Transfer, and it can't
+      move money. You sign in to your bank through Plaid; Manage Me never sees or stores your
+      bank password. Tax ID numbers you enter in the app are stored encrypted.</p>
 
     <h3>Where it's stored</h3>
     <p>All data is stored in a local SQLite database on the owner's computer. Nothing is stored
-      in the cloud.</p>
+      in the cloud. The computer's disk is fully encrypted with macOS FileVault, and Plaid access
+      tokens, API keys and tax ID numbers are encrypted again inside the database (Fernet).</p>
 
     <h3>How bank connections are protected</h3>
-    <p>Plaid access tokens are encrypted at rest. When you disconnect an account, its access is
-      revoked through Plaid and the stored token is deleted. You can disconnect at any time from
-      inside the app.</p>
+    <p>Signing in to the app needs a password and a code from an authenticator app. You can
+      disconnect a bank at any time from inside the app.</p>
+    <p>Disconnecting revokes access at Plaid and deletes the stored access token. It does not
+      delete transactions already imported; they stay in the local database unless you tick
+      'Also remove the transactions' when disconnecting, or delete them later. To request
+      deletion, email <a href="mailto:rajgoyal00@gmail.com">rajgoyal00@gmail.com</a>.</p>
 
     <h3>Optional AI helper</h3>
     <div class="card">
@@ -75,6 +87,16 @@
 
     <h3>How it's used</h3>
     <p>Your data is used only to power the app. It is never sold or shared for advertising.</p>
+  </section>
+
+  <section>
+    <h2>Policies</h2>
+    <ul>
+      <li><a href="security-policy.html">Information Security Policy</a></li>
+      <li><a href="access-control.html">Access Control Policy</a></li>
+      <li><a href="data-retention.html">Data Retention and Deletion Policy</a></li>
+      <li><a href="incident-response.html">Incident Response Plan</a></li>
+    </ul>
   </section>
 
   <section>

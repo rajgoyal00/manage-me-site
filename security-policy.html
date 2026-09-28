@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Information Security Policy · Manage Me</title>
+<meta name="description" content="How Manage Me protects bank data: encryption, TLS, MFA, patching and incident response.">
+<style>
+  :root {
+    --bg: #fafaf9; --text: #1c1917; --muted: #57534e; --line: #e7e5e4;
+    --accent: #0f766e; --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1c1917; --text: #f5f5f4; --muted: #a8a29e; --line: #44403c;
+            --accent: #5eead4; --card: #292524; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 32px; }
+  h1 { font-size: 2rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .tagline { color: var(--muted); font-size: 1.1rem; margin: 0; }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+  ul { padding-left: 1.2em; }
+  li { margin: 6px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; }
+  a { color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="meta"><a href="index.html">Manage Me</a></p>
+    <h1>Information Security Policy</h1>
+    <p class="meta">Effective 2026-09-28 · Last reviewed 2026-09-28</p>
+  </header>
+
+  <section>
+    <h2>Scope</h2>
+    <p>Manage Me is personal software built and run by a single developer, who is also its only
+      user. It runs only on the owner's own computer and is not a hosted service. This policy
+      covers that computer, the app, and the accounts used to run it (Plaid Dashboard, OpenAI,
+      GitHub, and email).</p>
+  </section>
+
+  <section>
+    <h2>Encryption at rest</h2>
+    <ul>
+      <li>The computer's disk is fully encrypted (macOS FileVault). This protects the whole
+        database, including transactions and balances.</li>
+      <li>Inside the database, the most sensitive values are encrypted again: Plaid access
+        tokens, Plaid and OpenAI API keys, the two-step sign-in secret, and tax ID numbers.
+        This uses Fernet (AES-128 in CBC mode with an HMAC-SHA256 check).</li>
+      <li>The encryption key is kept in a separate file that only the owner's user account can
+        read. It is never put in source control.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Encryption in transit</h2>
+    <ul>
+      <li>Every call to Plaid and to OpenAI uses HTTPS (TLS) with certificate verification
+        turned on.</li>
+      <li>The app only listens on the computer itself (127.0.0.1), so it can't be reached from
+        the network.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Sign-in and multi-factor authentication</h2>
+    <ul>
+      <li>Signing in to the app needs a password and a code from an authenticator app (TOTP).
+        This is required, not optional.</li>
+      <li>Passwords are stored only as bcrypt hashes. One-time backup codes are stored only as
+        hashes.</li>
+      <li>After 5 wrong codes, code entry is locked for 15 minutes. Sessions end after 7 days.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Vulnerability scanning and patching</h2>
+    <p>Python and JavaScript dependencies are checked for known vulnerabilities with pip-audit
+      and npm audit at least weekly, and before any update is deployed. Security fixes are
+      applied within these times, counted from when a fix is available:</p>
+    <table>
+      <tr><th>Severity</th><th>Fixed within</th></tr>
+      <tr><td>Critical</td><td>7 days</td></tr>
+      <tr><td>High</td><td>30 days</td></tr>
+      <tr><td>Medium and low</td><td>90 days</td></tr>
+    </table>
+    <p>If no fix exists, the affected component is replaced or the risk is reduced in some other
+      way within the same time.</p>
+  </section>
+
+  <section>
+    <h2>End-of-life software</h2>
+    <p>Every quarter, the owner checks the versions of the operating system, Python, Node.js
+      and the main frameworks against their published end-of-life dates, and upgrades before
+      any of them reaches end of life.</p>
+    <table>
+      <tr><th>Software</th><th>Version</th><th>Supported until</th></tr>
+      <tr><td>Python</td><td>3.14</td><td>October 2030</td></tr>
+      <tr><td>Node.js</td><td>24 (LTS)</td><td>April 2028</td></tr>
+      <tr><td>macOS</td><td>26</td><td>Supported</td></tr>
+      <tr><td>React</td><td>19</td><td>Supported</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Incident response</h2>
+    <p>Security incidents are handled under the <a href="incident-response.html">Incident
+      Response Plan</a>.</p>
+  </section>
+
+  <section>
+    <h2>Review</h2>
+    <p>This policy is reviewed at least once a year and after any security incident.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p><a href="mailto:rajgoyal00@gmail.com">rajgoyal00@gmail.com</a></p>
+  </section>
+
+  <footer><a href="index.html">Home</a> · <a href="security-policy.html">Security</a> ·
+    <a href="access-control.html">Access control</a> · <a href="data-retention.html">Data retention</a> ·
+    <a href="incident-response.html">Incident response</a></footer>
+</main>
+</body>
+</html>
