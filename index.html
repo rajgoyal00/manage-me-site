@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage Me</title>
+<meta name="description" content="Manage Me is a private, self-hosted personal finance and tax organizer for one household.">
+<style>
+  :root {
+    --bg: #fafaf9; --text: #1c1917; --muted: #57534e; --line: #e7e5e4;
+    --accent: #0f766e; --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1c1917; --text: #f5f5f4; --muted: #a8a29e; --line: #44403c;
+            --accent: #5eead4; --card: #292524; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 32px; }
+  h1 { font-size: 2rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .tagline { color: var(--muted); font-size: 1.1rem; margin: 0; }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+  ul { padding-left: 1.2em; }
+  li { margin: 6px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; }
+  a { color: var(--accent); }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Manage Me</h1>
+    <p class="tagline">A private personal finance and tax organizer that runs on your own computer.</p>
+  </header>
+
+  <section>
+    <h2>What it does</h2>
+    <p>Manage Me keeps one household's finances in one place. It brings in bank and card
+      transactions, sorts them into categories, tracks balances and transfers between accounts,
+      and gathers tax documents so tax time is easier.</p>
+    <p>The app runs on the owner's own computer. It is not a hosted service, and there are no
+      public sign-ups.</p>
+  </section>
+
+  <section>
+    <h2>Data &amp; Privacy</h2>
+
+    <h3>What bank data we access</h3>
+    <p>Manage Me uses <a href="https://plaid.com">Plaid</a> (Transactions product only) to import
+      your accounts (name, type, last 4 digits, and balance) and their transactions. It does not
+      request full account or routing numbers, identity details, or the ability to move money.
+      You sign in to your bank through Plaid. Manage Me never sees or stores your bank password.</p>
+
+    <h3>Where it's stored</h3>
+    <p>All data is stored in a local SQLite database on the owner's computer. Nothing is stored
+      in the cloud.</p>
+
+    <h3>How bank connections are protected</h3>
+    <p>Plaid access tokens are encrypted at rest. When you disconnect an account, its access is
+      revoked through Plaid and the stored token is deleted. You can disconnect at any time from
+      inside the app.</p>
+
+    <h3>Optional AI helper</h3>
+    <div class="card">
+      <p style="margin:0">Manage Me has an optional AI helper that suggests categories. It is
+        <strong>off by default</strong>. If you turn it on, redacted payee text, amounts, and
+        account type are sent to OpenAI for category suggestions. No account numbers,
+        credentials, or tokens are sent.</p>
+    </div>
+
+    <h3>How it's used</h3>
+    <p>Your data is used only to power the app. It is never sold or shared for advertising.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions about this app or your data: <a href="mailto:rajgoyal00@gmail.com">rajgoyal00@gmail.com</a></p>
+  </section>
+
+  <footer>Manage Me · Personal, self-hosted software</footer>
+</main>
+</body>
+</html>
